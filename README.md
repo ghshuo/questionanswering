@@ -1,6 +1,6 @@
 # questionanswering
 
-> My prime Nuxt.js project
+> My scrumtrulescent Nuxt.js project
 
 ## Build Setup
 
