@@ -1,5 +1,9 @@
 module.exports = {
   mode: 'universal',
+  generate: {
+    fallback: true, // if you want to use '404.html'
+    fallback: 'my-fallback/file.html' // if your hosting needs a custom location
+  },
   /*
    ** Headers of the page
    */
@@ -40,7 +44,8 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '@/plugins/iview'
+    '@/plugins/iview',
+    '~plugins/echarts'
   ],
   /*
    ** Nuxt.js dev-modules

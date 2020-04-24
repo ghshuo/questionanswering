@@ -9,6 +9,8 @@
         Welcome to the iView + Nuxt.js template
       </h2>
       <div class="links">
+        <nuxt-link to="/echartdemo">
+         Documentation</nuxt-link>
         <Button type="primary" target="_blank" to="https://nuxtjs.org/">
           Documentation
         </Button>
