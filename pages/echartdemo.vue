@@ -35,68 +35,157 @@ export default {
         xAxis: {
           type: 'category',
           data: ['周一', '周二', '周三', '周四', '周五', '周六']
-        },  
+        },
         yAxis: {
           type: 'value'
         },
-        series: [
+        series:[
           {
-            name: '直接访问',
-            type: 'bar',
-            stack: '总量',
-            label: {
-              show: true,
-              position: 'insideRight'
+            name:'次数',
+            type:'bar',
+            barWidth: '50%',
+            data:  [10, 52, 20, 34, 30, 30,
+                0,13,
+                32,14,
+                3,23,
+                39,1,32,
+                12,12,12],
+            itemStyle: {
+                normal: {
+                    //柱形图圆角，初始化效果
+                    barBorderRadius:[50, 50, 0, 0],
+                    label: {
+                        show: true,//是否展示
+                        textStyle: {
+                            fontWeight:'bolder',
+                            fontSize : '11',
+                            fontFamily : '微软雅黑',
+                        }
+                    }
+                }
             },
-            data: [320, 332, 301, 334, 390, 330, 320]
-          },
-          {
-            name: '邮件营销',
-            type: 'bar',
-            stack: '总量',
             label: {
-              show: true,
-              position: 'insideRight'
-            },
-           data: [320, 332, 301, 334, 390, 330, 320]
-          },
-          {
-            name: '联盟广告',
-            type: 'bar',
-            stack: '总量',
-            label: {
-              show: true,
-              position: 'insideRight'
-            },
-            data: [320, 332, 301, 334, 390, 330, 320]
-          }
+                normal: {
+                    show: true,
+                    color: '#000000',
+                    position: 'top'
+                }
+            }
+        }
         ]
+        // series: [
+        //   {
+        //     name: '直接访问',
+        //     type: 'bar',
+        //     stack: '总量',
+        //     label: {
+        //       show: true,
+        //       position: 'insideRight'
+        //     },
+        //     data: [320, 332, 301, 334, 390, 330, 320]
+        //   },
+        //   {
+        //     name: '邮件营销',
+        //     type: 'bar',
+        //     stack: '总量',
+        //     label: {
+        //       show: true,
+        //       position: 'insideRight'
+        //     },
+        //     data: [320, 332, 301, 334, 390, 330, 320]
+        //   },
+        //   {
+        //     name: '联盟广告',
+        //     type: 'bar',
+        //     stack: '总量',
+        //     label: {
+        //       show: true,
+        //       position: 'insideRight'
+        //     },
+        //     data: [320, 332, 301, 334, 390, 330, 320]
+        //   }
+        // ]
       })
     },
     echartsInit2() {
-      let myChart = this.$echarts.init(document.getElementById('myChart2'))
+      let myChart = this.$echarts.init(document.getElementById('myChart2'));
+      var _yAxis = [10, 52, 20, 34, 30, 30,
+                0,13,
+                32,14,
+                3,23,
+                39,1,32,
+                12,12,12];
       myChart.setOption({
-        title: { text: 'echarts 饼图' },
-        series: [
-          {
-            name: '访问来源',
-            type: 'pie',
-            radius: '55%',
-            data: [
-              { value: 235, name: '视频广告' },
-              { value: 274, name: '联盟广告' },
-              { value: 310, name: '邮件营销' },
-              { value: 335, name: '直接访问' },
-              { value: 400, name: '搜索引擎' }
-            ]
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
           }
-        ]
+        },
+        legend: {
+          // data: ['直接访问', '邮件营销', '联盟广告']
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: [
+          {
+            type: 'category',
+            data: [
+                  '淡白', '淡红', 
+                  '尖红', '边尖红',
+                    '明显','不明显',
+                    '明显','不明显',
+                    '明显','不明显',
+                    '薄腻','厚腻',
+                    '薄','黄',
+                    '白','薄白'],
+                  
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ],
+         series : [
+        {
+            name:'次数',
+            type:'bar',
+            barWidth: '50%',
+            data: _yAxis,
+            itemStyle: {
+                normal: {
+                    //柱形图圆角，初始化效果
+                    barBorderRadius:[50, 50, 0, 0],
+                    label: {
+                        show: true,//是否展示
+                        textStyle: {
+                            fontWeight:'bolder',
+                            fontSize : '11',
+                            fontFamily : '微软雅黑',
+                        }
+                    }
+                }
+            },
+            label: {
+                normal: {
+                    show: true,
+                    color: '#000000',
+                    position: 'top'
+                }
+            }
+        }
+    ]
       })
     }
   },
   mounted() {
     this.echartsInit()
-    // this.echartsInit2()
+    this.echartsInit2()
   }
 }
 </script>
