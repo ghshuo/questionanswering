@@ -1,66 +1,66 @@
 <template>
   <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        questionanswering
-      </h1>
-      <h2 class="subtitle">
-        Welcome to the iView + Nuxt.js template
-      </h2>
-      <div class="links">
-        <nuxt-link to="/echartdemo">
-         Documentation</nuxt-link>
-        <Button type="primary" target="_blank" to="https://nuxtjs.org/">
-          Documentation
-        </Button>
-        <Button target="_blank" to="https://github.com/nuxt/nuxt.js">
-          GitHub
-        </Button>
-        <Button target="_blank" to="https://www.iviewui.com/">
-          iView
-        </Button>
-      </div>
+    <div class="header">
+      <div class="headerTitle"><span>美赞臣</span>监测日报</div>
+      <div class="headerTime">2020-03-25 18:00 ——2020-03-25 23:59</div>
+      <img class="logo" src="~assets/image/logo.jpg" alt="logo" />
+    </div>
+    <div class="content">
+      <Readinglist></Readinglist>
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import Readinglist from '~/components/readinglist.vue'
+
 export default {
   components: {
-    Logo
+    Readinglist
   }
 }
 </script>
 
 <style lang="scss">
 .container {
-  margin: 0 auto;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  .title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: red;
-  letter-spacing: 1px;
-}
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-.links {
-  padding-top: 15px;
+  flex-direction: column;
+  .header {
+    width: 100%;
+    height: 574px;
+    background: url(~assets/image/branner.png);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .headerTitle {
+      font-size: 36px;
+      font-weight: 600;
+      color: #ffffff;
+      span {
+        color: rgba(0, 249, 247, 1);
+      }
+    }
+    .headerTime {
+      font-size: 13px;
+      font-weight: 400;
+      margin-top: 28px;
+      color: rgba(255, 255, 255, 1);
+    }
+    .logo {
+      width: 121px;
+      height: 32px;
+      margin-top: 33px;
+      background: rgba(216, 216, 216, 1);
+      border-radius: 23px;
+    }
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+  }
 }
 </style>
