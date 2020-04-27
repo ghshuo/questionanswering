@@ -45,6 +45,7 @@ module.exports = {
    */
   plugins: [
     '@/plugins/iview',
+    '~plugins/moment',
     '~plugins/echarts'
   ],
   /*

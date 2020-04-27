@@ -15,6 +15,14 @@
 import Readinglist from '~/components/readinglist.vue'
 
 export default {
+  head () {
+    return {
+      title: '美赞臣监测日报',
+      meta: [
+        { hid: 'description', name: '美赞臣监测日报', content: '10分钟美赞臣监测日报' }
+      ]
+    }
+  },
   components: {
     Readinglist
   }

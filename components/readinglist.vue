@@ -4,45 +4,49 @@
       <img src="~assets/image/titleLogo.png" alt="titleLogo" />
       <span>今日要闻导读</span>
     </div>
-    <div class="readingItem">
-      <div class="readingItemLeft">正</div>
+    <div class="readingItem" v-for="(item, index) in datalist" :key="index">
+      <div v-if="item.zf == 1" class="readingItemLeft positive">正</div>
+      <div v-else-if="item.zf == 3" class="readingItemLeft central">中</div>
+      <div v-else class="readingItemLeft negative">负</div>
       <div class="readingItemRight">
         <div class="readingItemTop">
           <div class="readingItemTopConter">
             <div class="Title">
-              <a target="_blank" href="http://www.baidu.com"
-                >1.2019年08月09日婴幼儿配方奶粉产品配方注册决定带领信息——已批准2019年08月09日婴幼儿配方奶粉产品配方注册决定带领信息——已批准2019年08月09日婴幼儿配方奶粉产品配方注册决定带领信息——已批准2019年08月09日婴幼儿配方奶粉产品配方注册决定带领信息——已批准</a
-              >
+              <a target="_blank" :href="item.url">{{ item.title }}</a>
             </div>
             <div class="brand">美素佳儿</div>
           </div>
-          <div class="abstract">
-            摘要：蛋白质（protein）是生命的物质基础，是有机大分子，氨基酸是蛋白质的基本组成单位。它是与生命及与各种形式的生命活动紧密联系在一起的物质。机体中的每一个细胞和所有重要组成部分都有蛋白质参与。蛋白质占人体重量的16%~20%新
-          </div>
+          <div class="abstract">摘要：{{ item.content }}</div>
           <div class="information">
             <div class="link">
-              <a
-                target="_blank"
-                href="https://www.yidianzixun.com/article/0P0VaT2V"
-                >链接：https://www.yidianzixun.com/article/0P0VaT2V</a
+              <a target="_blank" :href="item.url" :title="item.url"
+                >链接：{{ item.url }}</a
               >
             </div>
             <div class="Published">
-              发布者：<span title="界面新闻">界面新闻界面新闻界面新闻</span>
+              发布者：<span :title="item.publisher_name">{{
+                item.publisher_name
+              }}</span>
             </div>
             <div class="insertion">
               <div class="Platform">
-                平台：<span title="一点号">一点号界面新闻</span>
+                <div v-if="item.name != null">
+                  平台：<span :title="item.name">{{ item.name }}</span>
+                </div>
               </div>
             </div>
             <div class="Date">
-              发布时间：<span title="2020.04.1">9999.99.99</span>
+              发布时间：<span title="2020.04.1">{{
+                item.screen_time | moment
+              }}</span>
             </div>
             <div class="Volume">
-              传播量：<span class="volumeSpan">232323232323</span>
+              传播量：<span class="volumeSpan" @click="transmission()">{{ item.num_one }}</span>
             </div>
             <div class="Medial">
-              一类媒体传播量：<span class="mediaSpan">2323232323232323</span>
+              一类媒体传播量：<span class="mediaSpan">{{
+                item.is_yileimeiti
+              }}</span>
             </div>
           </div>
         </div>
@@ -54,8 +58,8 @@
 
 <script>
 export default {
-  data: {
-    return: {
+  data() {
+    return {
       datalist: [
         {
           id: 137851946,
@@ -469,6 +473,24 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    dataFormat(time) {
+      return `${time.getFullYear()}-${
+        time.getMonth() + 1 >= 10
+          ? time.getMonth() + 1
+          : '0' + (time.getMonth() + 1)
+      }-${time.getDate() >= 10 ? time.getDate() : '0' + time.getDate()}
+                     ${
+                       time.getHours() >= 10
+                         ? time.getHours()
+                         : '0' + time.getHours()
+                     } : ${
+        time.getMinutes() >= 10 ? time.getMinutes() : '0' + time.getMinutes()
+      } : ${
+        time.getSeconds() >= 10 ? time.getSeconds() : '0' + time.getSeconds()
+      }`
+    }
   }
 }
 </script>
@@ -504,13 +526,23 @@ export default {
     .readingItemLeft {
       width: 27px;
       height: 27px;
-      border: 1px solid #45d4ff;
       text-align: center;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #45d4ff;
       border-radius: 4px;
+    }
+    .positive {
+      color: rgb(198, 127, 255);
+      border: 1px solid rgb(198, 127, 255);
+    }
+    .central {
+      color: rgb(68, 211, 255);
+      border: 1px solid rgb(68, 211, 255);
+    }
+    .negative {
+      color: rgb(255, 139, 34);
+      border: 1px solid rgb(255, 139, 34);
     }
     .readingItemRight {
       width: 997px;
@@ -547,6 +579,7 @@ export default {
           color: rgb(102, 102, 102);
           font-size: 14px;
           margin-top: 18px;
+          text-align: left;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -560,12 +593,14 @@ export default {
           color: rgb(192, 192, 192);
           cursor: pointer;
           margin-top: 5px;
+          margin-bottom: 30px;
 
           .link {
             width: 224px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            margin-left: 0;
             a {
               color: rgb(192, 192, 192);
             }
@@ -575,6 +610,7 @@ export default {
             overflow: hidden;
             text-overflow: ellipsis;
             margin-left: 8px;
+            text-align: left;
           }
           .Published {
             width: 151px;
